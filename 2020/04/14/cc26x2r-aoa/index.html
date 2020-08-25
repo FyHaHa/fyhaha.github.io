@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量 | Hexo</title>
+  <meta name="description" content="在上一篇博客中(https://blog.csdn.net/dreamerhan/article/details/105248944)，我介绍了如何基于SimpleLink CC26x2R LaunchPad来进行定位系统的搭建，并如何运行可视化demo。但在Demo运行后，AoA是固定的值，如下图所示： 这是因为我们使用的Passive使用的是内置单天线，所以计算得到的角度只是一个固定值。本章节">
+<meta name="keywords" content="CC26x2R,RTLS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量">
+<meta property="og:url" content="http://www.hanfeiyu.com/2020/04/14/cc26x2r-aoa/index.html">
+<meta property="og:site_name" content="FyHaHa">
+<meta property="og:description" content="在上一篇博客中(https://blog.csdn.net/dreamerhan/article/details/105248944)，我介绍了如何基于SimpleLink CC26x2R LaunchPad来进行定位系统的搭建，并如何运行可视化demo。但在Demo运行后，AoA是固定的值，如下图所示： 这是因为我们使用的Passive使用的是内置单天线，所以计算得到的角度只是一个固定值。本章节">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413221046260.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_80,color_000000,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413211509783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_40,color_000000,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413212657380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_60,color_000000,t_70#pic_center,">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200414090519970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_60,color_000000,t_70#pic_center,">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020041322001427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_40,color_000000,t_70#pic_center, =500x250">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413221824713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_20,color_000000,t_70#pic_center,">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413222612965.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_16,color_FFFFFF,t_70#pic_center, =600x300,">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413222820604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_16,color_FFFFFF,t_70#pic_center, =300x200,">
+<meta property="og:updated_time" content="2020-08-24T13:55:50.795Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量">
+<meta name="twitter:description" content="在上一篇博客中(https://blog.csdn.net/dreamerhan/article/details/105248944)，我介绍了如何基于SimpleLink CC26x2R LaunchPad来进行定位系统的搭建，并如何运行可视化demo。但在Demo运行后，AoA是固定的值，如下图所示： 这是因为我们使用的Passive使用的是内置单天线，所以计算得到的角度只是一个固定值。本章节">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200413221046260.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_80,color_000000,t_70#pic_center">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.hanfeiyu.com/2020/04/14/cc26x2r-aoa/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="FyHaHa" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://me.csdn.net/dreamerhan" target="_blank">
+          <img class="img-circle img-rotate" src="/images/favicon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">FyHaHa</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hefei, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ssh连接/">ssh连接</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/无线信号/">无线信号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站搭建/">网站搭建</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CC26x2R/" style="font-size: 14px;">CC26x2R</a> <a href="/tags/CSI误差分析/" style="font-size: 13px;">CSI误差分析</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 13px;">IntelliJ IDEA</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/RTLS/" style="font-size: 14px;">RTLS</a> <a href="/tags/Spring-Boot/" style="font-size: 13px;">Spring Boot</a> <a href="/tags/WiFi/" style="font-size: 13px;">WiFi</a> <a href="/tags/hexo/" style="font-size: 13px;">hexo</a> <a href="/tags/ssh密钥/" style="font-size: 13px;">ssh密钥</a> <a href="/tags/博客搭建/" style="font-size: 13.5px;">博客搭建</a> <a href="/tags/感悟/" style="font-size: 13px;">感悟</a> <a href="/tags/随笔/" style="font-size: 13px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CC26x2R/">CC26x2R</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSI误差分析/">CSI误差分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ-IDEA/">IntelliJ IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTLS/">RTLS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WiFi/">WiFi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh密钥/">ssh密钥</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搭建/">博客搭建</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/22/BLE-Localization/" class="title">基于BLE的多节点AoA室内定位</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-22T09:00:29.000Z" itemprop="datePublished">2020-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/14/cc26x2r-aoa/" class="title">基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-14T01:18:25.000Z" itemprop="datePublished">2020-04-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/" class="title">基于CC26x2R LaunchPad的RTLS系统搭建</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-03-26T11:34:14.000Z" itemprop="datePublished">2020-03-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/03/20/Spring-boot-basedon-maven/" class="title">Spring Boot学习笔记1：使用IntelliJ IDEA创建基于Spring Boot的Maven项目</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-03-20T13:03:57.000Z" itemprop="datePublished">2020-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/随笔/">随笔</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/12/14/note20191214/" class="title">艺术</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-14T06:11:57.000Z" itemprop="datePublished">2019-12-14</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AoA测量"><span class="toc-number">1.</span> <span class="toc-text">AoA测量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#天线的选择"><span class="toc-number">2.</span> <span class="toc-text">天线的选择</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-cc26x2r-aoa" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/14/cc26x2r-aoa/" class="article-date">
+	  <time datetime="2020-04-14T01:18:25.000Z" itemprop="datePublished">2020-04-14</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CC26x2R/">CC26x2R</a>, <a class="article-tag-link" href="/tags/RTLS/">RTLS</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/14/cc26x2r-aoa/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>在上一篇博客中(<a href="https://blog.csdn.net/dreamerhan/article/details/105248944" target="_blank" rel="noopener">https://blog.csdn.net/dreamerhan/article/details/105248944</a>)，我介绍了如何基于SimpleLink CC26x2R LaunchPad来进行定位系统的搭建，并如何运行可视化demo。但在Demo运行后，AoA是固定的值，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20200413221046260.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_80,color_000000,t_70#pic_center" style="zoom:30%;"></p>
+<p>这是因为我们使用的Passive使用的是内置单天线，所以计算得到的角度只是一个固定值。<strong>本章节，我将介绍如何利用CC26XR开发板来进行AoA测量。</strong></p>
+<p>按照<a href="https://blog.csdn.net/dreamerhan/article/details/105248944" target="_blank" rel="noopener">https://blog.csdn.net/dreamerhan/article/details/105248944</a>配置好Master, Slave, Passive节点。CC26xR开发版烧录对应的程序就可以充当Master，Slave端，Passive端除了烧录对应的程序之外，还需要将开发板上的C51电容切换至外置天线连接点，如下图。<br><img src="https://img-blog.csdnimg.cn/20200413211509783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_40,color_000000,t_70#pic_center" style="zoom:30%;"><br>然后将BOOSTXL-AoA上的JSC连接口连接到已配置好外置天线开关的开发版上，然后将BOOSTXL-AoA上的引脚与CC26x2R开发版上的引脚连接。<br><img src="https://img-blog.csdnimg.cn/20200413212657380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_60,color_000000,t_70#pic_center," style="zoom:33%;"><br><img src="https://img-blog.csdnimg.cn/20200414090519970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_60,color_000000,t_70#pic_center," style="zoom:33%;"><br>以上就是我们的准备工作，接下来开始进入有趣的步骤。</p>
+<h2 id="AoA测量"><a href="#AoA测量" class="headerlink" title="AoA测量"></a>AoA测量</h2><p>TI官网上下载的SDK中，有三种计算AoA的模式：仅Passive端提供AoA测量，仅Master端提供AoA测量，Passive和Master端都提供AoA测量。这里我们选择仅Passive端提供AoA测量。（因为小编手里目前只有一个BOOSTXL-AOA）。需要对代码进行修改，具体修改方式，见官网说明<a href="http://dev.ti.com/tirex/explore/node?node=AHYhhuDNTaRXzkOlahOlvA__pTTHBmu__LATEST" target="_blank" rel="noopener">http://dev.ti.com/tirex/explore/node?node=AHYhhuDNTaRXzkOlahOlvA__pTTHBmu__LATEST</a>。 </p>
+<p><strong>需要注意的是，如果我们想直接利用TI官方SDK提供的Demo，需要也将<code>rtls_master</code>中的<code>main.c</code>的<code>rtlsConfig.rtlsCapab</code>字段也添加<code>RTLS_CAP_AOA_RX</code>. 否则，在运行Demo时，会提示<code>Warring ! One of the device not supporting AOA functionality</code>，最后的结果就是一直收不到AoA packet。</strong></p>
+<p>然后将节点放置在离地面高1m的平台上，这样做的目的是减小多径和信号的衰减。为了增加测量结果的准确度，建议节点要放在等高的位置上，否则会在三维上产生误差，也要保证节点之间没有遮挡物和发射物。<br><img src="https://img-blog.csdnimg.cn/2020041322001427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_40,color_000000,t_70#pic_center, =500x250" style="zoom:50%;"></p>
+<p>之后，在终端运行：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">cd</span> /Applications/ti/simplelink_cc13x2_26x2_sdk_3_40_00_02/tools/ble5stack/rtls_agent/rtls_ui
+
+<span class="token function">chmod</span> 777 rtls_ui_macos
+
+rtls_ui_macos</code></pre>
+<p>便可以观察到在Passive端计算得到的AoA测量值。</p>
+<p>如果想让测量精度更高，可以改变接受端(Passive)天线的朝向，当天线阵列垂直发送端和接收端连线的时候，测量精度更高。修改天线朝向时，要注意使用的是天线阵列1还是天线阵列2。<br><img src="https://img-blog.csdnimg.cn/20200413221824713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_20,color_000000,t_70#pic_center," style="zoom:100%;"></p>
+<h2 id="天线的选择"><a href="#天线的选择" class="headerlink" title="天线的选择"></a>天线的选择</h2><p>BOOSTXL-AOA天线有两个相互正交的天线阵列，但是两个天线阵列不能同时工作，框图如下，<br><img src="https://img-blog.csdnimg.cn/20200413222612965.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_16,color_FFFFFF,t_70#pic_center, =600x300," style="zoom:50%;"><br>由框图可以看出，U1开关在同一时刻，只能选择DIO27-1引脚或者DIO27-0引脚，同时，从框图中，我们还可以得出，在同一个天线阵列的三根天线，也不是同时接收信号，所以会存在一个天线切换，这一点将在下一篇文章中提及。各个引脚控制逻辑如下：<br><img src="https://img-blog.csdnimg.cn/20200413222820604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RyZWFtZXJoYW4=,size_16,color_FFFFFF,t_70#pic_center, =300x200," style="zoom:50%;"><br>用户也可以直接修改<code>/Applications/ti/simplelink_cc13x2_26x2_sdk_3_40_00_02/tools/ble5stack/rtls_agent/examples/rtls_example_with_rtls_util.py</code>中的以下字段：</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token string">"aoa_cc26x2"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"aoa_slot_durations"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token string">"aoa_sample_rate"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token string">"aoa_sample_size"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token string">"aoa_sampling_control"</span><span class="token operator">:</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token string">'0x10'</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        ## bit <span class="token number">0</span>   <span class="token operator">-</span> <span class="token number">0x00</span> <span class="token operator">-</span> <span class="token keyword">default</span> filtering<span class="token punctuation">,</span> <span class="token number">0x01</span> <span class="token operator">-</span> RAW_RF no filtering<span class="token punctuation">,</span>
+        ## bit <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span> <span class="token operator">-</span> <span class="token keyword">default</span><span class="token operator">:</span> <span class="token number">0x10</span> <span class="token operator">-</span> ONLY_ANT_1<span class="token punctuation">,</span> optional<span class="token operator">:</span> <span class="token number">0x20</span> <span class="token operator">-</span> ONLY_ANT_2
+        <span class="token string">"aoa_sampling_enable"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token string">"aoa_pattern_len"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token string">"aoa_ant_pattern"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span></code></pre>
+<p>在SDK3.30版本中，字段有所不同，但是大同小异，</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token string">"aoa_cc26x2"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"aoa_slot_durations"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+         <span class="token string">"aoa_sample_rate"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+         <span class="token string">"aoa_sample_size"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+         <span class="token string">"aoa_sampling_control"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//1: antenna array 1; 0: antenna array 2;</span>
+         <span class="token string">"aoa_sampling_enable"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+         <span class="token string">"aoa_num_of_ant"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+         <span class="token string">"aoa_ant_array_switch"</span><span class="token operator">:</span> <span class="token number">27</span><span class="token punctuation">,</span>
+         <span class="token string">"aoa_ant_array"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">29</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true">//三根天线的引脚号</span>
+                    <span class="token punctuation">}</span></code></pre>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.hanfeiyu.com/2020/04/14/cc26x2r-aoa/" title="基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量" target="_blank" rel="external">http://www.hanfeiyu.com/2020/04/14/cc26x2r-aoa/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://me.csdn.net/dreamerhan" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/favicon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://me.csdn.net/dreamerhan" target="_blank"><span class="text-dark">FyHaHa</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/22/BLE-Localization/" title="基于BLE的多节点AoA室内定位"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/" title="基于CC26x2R LaunchPad的RTLS系统搭建"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

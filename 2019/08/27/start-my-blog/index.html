@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>完整教程:(低成本快速)手把手教你搭建基于hexo+GitHub的个人博客 | Hexo</title>
+  <meta name="description" content="最近，韩先森即将迎来开学，于是就想利用开学之前的这段日子做些小玩意，比如搭建一个个人博客出来，心动不如行动，那就开始做吧。我之前对网站搭建也有一定的了解，但是仅限于了解，基本上和小白差不多。这不，前前后后折腾了3天的时间才将网站搭了出来，搭建过程中，也就是购买域名的时候花了点RMB，总体成本是55元（当然除去人力成本和时间成本这些哈&amp;lt;–&amp;gt;）。网站能够搭建出来也要感谢godweiyang">
+<meta name="keywords" content="博客搭建,hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="完整教程:(低成本快速)手把手教你搭建基于hexo+GitHub的个人博客">
+<meta property="og:url" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/index.html">
+<meta property="og:site_name" content="FyHaHa">
+<meta property="og:description" content="最近，韩先森即将迎来开学，于是就想利用开学之前的这段日子做些小玩意，比如搭建一个个人博客出来，心动不如行动，那就开始做吧。我之前对网站搭建也有一定的了解，但是仅限于了解，基本上和小白差不多。这不，前前后后折腾了3天的时间才将网站搭了出来，搭建过程中，也就是购买域名的时候花了点RMB，总体成本是55元（当然除去人力成本和时间成本这些哈&amp;lt;–&amp;gt;）。网站能够搭建出来也要感谢godweiyang">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/1.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/2.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/4.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/5.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/6.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/7.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/8.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/3.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/9.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/10.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/11.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/12.jpg">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/13.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/14.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/15.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/9.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/16.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/17.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/18.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/19.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/26.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/27.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/28.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/20.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/21.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/22.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/23.jpg">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/25.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/24.png">
+<meta property="og:updated_time" content="2020-08-24T13:55:50.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="完整教程:(低成本快速)手把手教你搭建基于hexo+GitHub的个人博客">
+<meta name="twitter:description" content="最近，韩先森即将迎来开学，于是就想利用开学之前的这段日子做些小玩意，比如搭建一个个人博客出来，心动不如行动，那就开始做吧。我之前对网站搭建也有一定的了解，但是仅限于了解，基本上和小白差不多。这不，前前后后折腾了3天的时间才将网站搭了出来，搭建过程中，也就是购买域名的时候花了点RMB，总体成本是55元（当然除去人力成本和时间成本这些哈&amp;lt;–&amp;gt;）。网站能够搭建出来也要感谢godweiyang">
+<meta name="twitter:image" content="http://www.hanfeiyu.com/2019/08/27/start-my-blog/1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.hanfeiyu.com/2019/08/27/start-my-blog/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="FyHaHa" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://me.csdn.net/dreamerhan" target="_blank">
+          <img class="img-circle img-rotate" src="/images/favicon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">FyHaHa</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hefei, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ssh连接/">ssh连接</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/无线信号/">无线信号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站搭建/">网站搭建</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CC26x2R/" style="font-size: 14px;">CC26x2R</a> <a href="/tags/CSI误差分析/" style="font-size: 13px;">CSI误差分析</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 13px;">IntelliJ IDEA</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/RTLS/" style="font-size: 14px;">RTLS</a> <a href="/tags/Spring-Boot/" style="font-size: 13px;">Spring Boot</a> <a href="/tags/WiFi/" style="font-size: 13px;">WiFi</a> <a href="/tags/hexo/" style="font-size: 13px;">hexo</a> <a href="/tags/ssh密钥/" style="font-size: 13px;">ssh密钥</a> <a href="/tags/博客搭建/" style="font-size: 13.5px;">博客搭建</a> <a href="/tags/感悟/" style="font-size: 13px;">感悟</a> <a href="/tags/随笔/" style="font-size: 13px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CC26x2R/">CC26x2R</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSI误差分析/">CSI误差分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ-IDEA/">IntelliJ IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTLS/">RTLS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WiFi/">WiFi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh密钥/">ssh密钥</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搭建/">博客搭建</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/22/BLE-Localization/" class="title">基于BLE的多节点AoA室内定位</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-22T09:00:29.000Z" itemprop="datePublished">2020-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/14/cc26x2r-aoa/" class="title">基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-14T01:18:25.000Z" itemprop="datePublished">2020-04-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/" class="title">基于CC26x2R LaunchPad的RTLS系统搭建</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-03-26T11:34:14.000Z" itemprop="datePublished">2020-03-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/03/20/Spring-boot-basedon-maven/" class="title">Spring Boot学习笔记1：使用IntelliJ IDEA创建基于Spring Boot的Maven项目</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-03-20T13:03:57.000Z" itemprop="datePublished">2020-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/随笔/">随笔</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/12/14/note20191214/" class="title">艺术</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-14T06:11:57.000Z" itemprop="datePublished">2019-12-14</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、准备工作"><span class="toc-number">1.</span> <span class="toc-text">一、准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Node-js安装"><span class="toc-number">1.1.</span> <span class="toc-text">1、Node.js安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Git安装"><span class="toc-number">1.2.</span> <span class="toc-text">2、Git安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、GitHub准备工作"><span class="toc-number">1.3.</span> <span class="toc-text">3、GitHub准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、hexo"><span class="toc-number">1.4.</span> <span class="toc-text">4、hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、网站的搭建"><span class="toc-number">2.</span> <span class="toc-text">二、网站的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-、本地与GitHub连接"><span class="toc-number">2.1.</span> <span class="toc-text">1 、本地与GitHub连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、网站配置"><span class="toc-number">2.2.</span> <span class="toc-text">2、网站配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、创建第一篇博客"><span class="toc-number">2.3.</span> <span class="toc-text">3、创建第一篇博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、绑定个人域名"><span class="toc-number">2.4.</span> <span class="toc-text">4、绑定个人域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、添加主题"><span class="toc-number">2.5.</span> <span class="toc-text">5、添加主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、实现下载功能"><span class="toc-number">2.6.</span> <span class="toc-text">6、实现下载功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、多台设备同步更新网站"><span class="toc-number">3.</span> <span class="toc-text">三、多台设备同步更新网站</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、代码备份到GitHub上"><span class="toc-number">3.1.</span> <span class="toc-text">1、代码备份到GitHub上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、在另一台设备上创建发布博客"><span class="toc-number">3.2.</span> <span class="toc-text">2、在另一台设备上创建发布博客</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、问题以及解决"><span class="toc-number">4.</span> <span class="toc-text">四、问题以及解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、使用gitalk插件实现评论"><span class="toc-number">4.1.</span> <span class="toc-text">1、使用gitalk插件实现评论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、图片上传失败"><span class="toc-number">4.2.</span> <span class="toc-text">2、图片上传失败</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-start-my-blog" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      完整教程:(低成本快速)手把手教你搭建基于hexo+GitHub的个人博客
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/08/27/start-my-blog/" class="article-date">
+	  <time datetime="2019-08-27T13:24:26.000Z" itemprop="datePublished">2019-08-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/网站搭建/">网站搭建</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/hexo/">hexo</a>, <a class="article-tag-link" href="/tags/博客搭建/">博客搭建</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/08/27/start-my-blog/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>最近，韩先森即将迎来开学，于是就想利用开学之前的这段日子做些小玩意，比如搭建一个个人博客出来，心动不如行动，那就开始做吧。我之前对网站搭建也有一定的了解，但是仅限于了解，基本上和小白差不多。这不，前前后后折腾了3天的时间才将网站搭了出来，搭建过程中，也就是购买域名的时候花了点RMB，总体成本是55元（当然除去人力成本和时间成本这些哈&lt;–&gt;）。网站能够搭建出来也要感谢godweiyang的支持（ <a href="https://godweiyang.com" target="_blank" rel="noopener">https://godweiyang.com</a> ），godweiyang这篇博客已经写的很详细了，但自己在搭建过程中依然遇到这样那样的问题，所以结合自身的实际情况，来写这篇博客。所以想要拥有个人博客，并且<strong>没有任何网站搭建经验并且还想省钱</strong>的同学，那么这篇博客绝对不辜负你的期望，话不多说，我们开始挽起袖子，加油干！</p>
+<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><p>首先，你需要在拥有一台电脑(废话)，然后在电脑上安装:</p>
+<ul>
+<li><code>Node.js</code></li>
+<li><code>Git</code></li>
+<li><code>hexo</code></li>
+</ul>
+<p>除此之外，你应该还需要在GitHub上注册一个账号，如果你没有的话。</p>
+<p>这里我就直接使用实验室配的电脑来进行搭建，操作系统是Windows 10.</p>
+<h3 id="1、Node-js安装"><a href="#1、Node-js安装" class="headerlink" title="1、Node.js安装"></a>1、Node.js安装</h3><p>下载地址：<a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></p>
+<p>下载成功后，直接一路傻瓜式安装即可。安装完成后，打开终端（ <code>Win+R</code>，然后输入<code>cmd</code> ），输入指令:</p>
+<pre><code>node -v
+npm -v</code></pre><p>如果出现关于node.js的版本号之后(下图)，就证明这一步已经成功了，开始下一步。</p>
+<p><img src="1.png" alt></p>
+<h3 id="2、Git安装"><a href="#2、Git安装" class="headerlink" title="2、Git安装"></a>2、Git安装</h3><p>下载地址：<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
+<p>下载成功后，安装时基本上都选择默认选项即可，有人可能问，Git这种命令行工具是不是必须安装到C盘才可以，其实是不需要的，包括上面的Node.js安装位置，这里韩先森将他们都统一安装到了我的软件盘:D盘（个人习惯）。然后你在桌面左下角搜索栏中输入Git，如果出现Git bash图标，那么恭喜你，这一步也完成了。</p>
+<p><img src="2.png" alt></p>
+<h3 id="3、GitHub准备工作"><a href="#3、GitHub准备工作" class="headerlink" title="3、GitHub准备工作"></a>3、GitHub准备工作</h3><p>首先需要在GitHub上申请一个账号（这一步可以直接参照官网指导），然后新建一个repository ：</p>
+<p>（ <em>将 <code>Initialize this repository with a README</code> 这项也打上勾</em> ）</p>
+<p><img src="4.png" alt></p>
+<p><strong>注意这里repository name格式一定是 <code>username.github.io</code> ，（username就是你github的用户名，比如韩先森的用户名是fyhaha，所以repository name就是fyhaha.github.io ）否则网站会出现404或者导致网页显示不正常。</strong></p>
+<p>创建完成后，打开你所创建的项目，点击<code>setting-&gt;GitHub Pages -&gt; change theme--&gt;select theme</code>,具体流程可以参照下图：</p>
+<p><img src="5.png" alt></p>
+<p>（<em>这个模块要在settings的最下面，不是很容易找到</em>  ）</p>
+<p><img src="6.png" alt></p>
+<p><img src="7.png" alt></p>
+<p>操作完之后，我们返回GitHub Pages 发现变成了这个样子：（由于<code>hanfeiyu.com</code>是我已经注册的域名，所以显示这个，按照流程正常操作之后，应该是 <a href="http://github.com/username/username.github.io" target="_blank" rel="noopener">http://github.com/username/username.github.io</a> ）</p>
+<p><img src="8.png" alt></p>
+<h3 id="4、hexo"><a href="#4、hexo" class="headerlink" title="4、hexo"></a>4、hexo</h3><p>从这里开始，我们就需要将Git Bash工具引上舞台了，我在D盘（是我的存储盘，因人而异哟，在其他盘建立也无碍）目录下新建了一个文件夹MyBlog，然后再MyBlog文件夹中，右击鼠标，打开git Bash，然后输入指令：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli</code></pre>
+<p>这一步下载的时候可能会很慢，耐心等待一会或者使用国内镜像源来下载：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> -g cnpm --registry<span class="token operator">=</span>https://registry.npm.taobao.org
+cnpm <span class="token function">install</span> -g hexo-cli </code></pre>
+<p>使用 指令</p>
+<pre class=" language-bash"><code class="language-bash">hexo -v</code></pre>
+<p>来检查hexo是否安装成功，出现下图则说明安装成功。</p>
+<p><img src="3.png" alt></p>
+<p>然后输入以下命令:</p>
+<pre class=" language-bash"><code class="language-bash">hexo init //初始化文件夹，这一步操作主要是从Github上下载hexo相关文件
+<span class="token function">npm</span> <span class="token function">install</span> //下载相关组件，指令执行后，会发现所在的文件目录下多了一个node_modules的文件夹
+//至此，网站在本地的配置工作也完成了，那么接下来就可以先将网页部署在本地上了
+hexo g //生成静态网页文件，操作完成后，目录下又会多出一个public文件夹。这里面就是存储生成的所有静态网页文件。
+hexo s //将网页文件部署到本地</code></pre>
+<p>然后打开浏览器，输入<a href="https://localhost:4000" target="_blank" rel="noopener">https://localhost:4000</a> ，就可以看到以下激动的画面:</p>
+<p><img src="9.png" alt></p>
+<p>这就说明，你已经成功的在本地搭建了一个基于hexo的网站，但是先着急，还有更激动的事情呢……</p>
+<p>网站光部署在本地是不够的，因为你部署在本地就能只供自己在自己的电脑上访问，那就不算做是网站。接下来我们就要将它部署到GitHub上，可以使得全球的互联网用户来访问。</p>
+<p>到此为止，我们前期的所有工作均已准备就绪。那么接下来我们就开始正式进入搭建过程！</p>
+<h2 id="二、网站的搭建"><a href="#二、网站的搭建" class="headerlink" title="二、网站的搭建"></a>二、网站的搭建</h2><h3 id="1-、本地与GitHub连接"><a href="#1-、本地与GitHub连接" class="headerlink" title="1 、本地与GitHub连接"></a>1 、本地与GitHub连接</h3><p>结束上文的操作后，我们需要将本地（你的电脑）与GitHub通过ssh连接起来，因为这样，你才能将本地的生成的网页静态文件，部署到GitHub服务器上。</p>
+<p>依然在我们1.4节中所建立的<code>D:\MyBlog</code>文件夹中，打开Git Bash，然后输入以下指令：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"FyHaHa"</span> //<span class="token string">"FyHaHa"</span> 替换成你自己的GitHub用户名，不区分大小写
+<span class="token function">git</span> config --global user.email <span class="token string">"fyhancs@gmail.com"</span> //<span class="token string">"fyhancs@gmail.com"</span> 替换成你在GitHub注册的邮箱</code></pre>
+<p>利用Git来生成本地的ssh key</p>
+<pre class=" language-bash"><code class="language-bash">ssh-keygen -t rsa -C <span class="token string">"fyhancs@gmail.com"</span></code></pre>
+<p><img src="10.png" alt></p>
+<p>如果本地上已经存在了id_rsa文件，输入y，直接替换。然后连续两个回车，便可以生成密钥文件。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">cat</span> ~/.ssh/id_rsa.pub</code></pre>
+<p>查看密钥信息：</p>
+<p><img src="11.png" alt></p>
+<p>然后在Github中，点击头像下面的settings–&gt;SSH and GPG keys，新建一个ssh，将密钥信息复制到框中，然后保存。</p>
+<p><img src="12.jpg" alt></p>
+<p><img src="13.png" alt></p>
+<p>输入以下指令，如果出现你的GitHub用户名，那就证明连接成功！</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">ssh</span> -T git@github.com </code></pre>
+<p><img src="14.png" alt></p>
+<h3 id="2、网站配置"><a href="#2、网站配置" class="headerlink" title="2、网站配置"></a>2、网站配置</h3><p>OK ，然后我们对hexo进行环境配置。在进行环境配置之前，先让大家了解一下hexo的结构。经过以上步骤后，在<code>D:\MyBlog\</code>的目录中会存在以下文件夹以及文件：</p>
+<p><img src="15.png" alt></p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">node_modules</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#存储的是hexo的各种组件或者第三方插件，这个文件夹中的文件一般不需要我们去修改。</span>
+<span class="token key atrule">public</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#当在本地进行调试时，所生成的网页静态文件存储于此，这个文件夹中的文件也不需要我们去修改。</span>
+<span class="token key atrule">scaffolds</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#这里面有post.md,draft.md,page.md这三个文件，可以将他们看成模板文件，比如post.md就是文章的模板，里面定义了文章日期、是否置顶等属性。</span>
+<span class="token key atrule">source</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#存储文章等资源文件。 </span>
+<span class="token key atrule">theme</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#存储网站的主题模板。</span>
+_config：<span class="token comment" spellcheck="true">#网站的配置文件。</span></code></pre>
+<p>我们要做的是打开<code>_config.yml</code>文件，对网站的属性进行配置，比如：网站名称、logo等等（可以根据个人需要来进行修改)。这里我们只针对网站部署模块进行修改：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># Deployment</span>
+<span class="token comment" spellcheck="true">## Docs: https://hexo.io/docs/deployment.html</span>
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+  <span class="token key atrule">repository</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//github.com/username/username.github.io.git  //网站的静态文件将会部署在这里，username是GitHub的用户名，记得替换
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> master</code></pre>
+<p>这样，就完成了网站在GitHub上的部署。</p>
+<p>还是在Git Bash中输入</p>
+<pre class=" language-bash"><code class="language-bash">hexo clean
+hexo g 
+hexo d //完成部署操作</code></pre>
+<p>然后在打开浏览器，输入<a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a> ，你就可以看到：</p>
+<p><img src="9.png" alt></p>
+<h3 id="3、创建第一篇博客"><a href="#3、创建第一篇博客" class="headerlink" title="3、创建第一篇博客"></a>3、创建第一篇博客</h3><p>还是在上文一直使用的Git bash中，输入</p>
+<pre class=" language-bash"><code class="language-bash">hexo new post <span class="token string">"my_artical"</span></code></pre>
+<p>这样就在<code>D:\MyBlog\source\_posts</code>中创建了一个<code>my_artical.md</code>文件，然后用编辑器打开，你就可以随心所欲的在里面发挥你的创作才能了。创作完毕后，在打开的Git Bash中输入：</p>
+<pre class=" language-bash"><code class="language-bash">hexo clean
+hexo g 
+hexo d //完成部署操作</code></pre>
+<p>这样你就可以在<a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a> 中看到你的文章了，开心不开心，激动不激动。</p>
+<p>到这里，个人博客基本上就搭建完毕，以后你就可以在<a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a> 随心所欲的发表你的文章了。</p>
+<hr>
+<p>But！但是你如果想让博客用自己的个性化域名而不是用Github提供的默认域名，比如廖雪峰老师的liaoxuefeng.com这种看起来很有牌面的域名，应该怎么办呢，请接着看。</p>
+<h3 id="4、绑定个人域名"><a href="#4、绑定个人域名" class="headerlink" title="4、绑定个人域名"></a>4、绑定个人域名</h3><p>首先要在域名代理商那里购买域名，网上很多人说域名最好买国外的，有很多好处，不如不需要备案，便宜等等。但是我们的域名仅是用于个人博客用，再加上我们使用了GitHub的服务器，所以我个人建议，就直接在阿里云上购买即可。主要有以下几点优点：</p>
+<ul>
+<li>因为我们只是购买了域名，而没有使用阿里云的服务器，所以不需要进行繁琐的备案。但是域名购买需要实名认证，认证之后，很快就可以直接解析使用，我从认证到购买成功再到解析成功的过程，不到一小时就完成了。当然，我也不排除我是因为巧合，因为网上依然是有人在吐槽阿里云的认证速度。</li>
+<li>我对比了国内的阿里云、腾讯云、百度云，以及国外的namecheap、GoDaddy这些域名代理商，发现国内平台的域名更加便宜一些，并且付款手续简单，直接支付宝或者微信即可，国外的域名注册平台支持银联卡操作，大多不支持支付宝微信付款方式。</li>
+</ul>
+<p>在阿里云购买之后，等到域名状态从serverhold变为正常后，就可以进行解析了：</p>
+<p><img src="16.png" alt></p>
+<p>解析成功后，在你的GitHub上项目中，进入settings-&gt;Github Pages，在<code>Custom domain</code>中填写你的专属域名，注意，我这里没有带www，这样别人就可以直接在浏览器中输入hanfeiyu.com就可以访问我的博客了，要不然，别人在访问你的时候，必须要输入&lt;<a href="http://www.hanfeiyu.com&gt;">www.hanfeiyu.com&gt;</a> 才可以访问。然后save之后，你会在你的repository中发现多了一个CNAME的文件，然后再在<code>D:\MyBlog\source\</code>目录下新建一个CNAME文件（没有后缀）,在里面填写上你的专属域名<code>hanfeiyu.com</code>，保存。</p>
+<p><img src="17.png" alt></p>
+<p>这样，别人就可以使用你的专属域名来访问你的个人博客了。</p>
+<h3 id="5、添加主题"><a href="#5、添加主题" class="headerlink" title="5、添加主题"></a>5、添加主题</h3><p>如果你认为hexo默认的主题不符合你的气质,你可以自己到hexo官网上寻找一个适合你的主题风格。这里韩先森使用的是  hexo-theme-matery主题 (<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">https://github.com/blinkfox/hexo-theme-matery</a> )。将主题问价下载解压之后，放在<code>D:\MyBlog\theme</code>目录下，然后打开<code>D:\MyBlog\_config.yml</code>，修改theme属性：</p>
+<p><img src="18.png" alt></p>
+<p>hero-theme-matery提供了很多个性化功能的接口，比如：响应式设计、自定义界面、文章置顶、评论等，用户如果想使用某个功能，只需要在配置文件中进行配置即可。更多的精彩功能详见：</p>
+<ul>
+<li><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">https://github.com/blinkfox/hexo-theme-matery</a></li>
+</ul>
+<p>这是我基于hero-theme-matery主题搭建的博客网站 ( <a href="https://hanfeiyu.com" target="_blank" rel="noopener">https://hanfeiyu.com</a>  ) 效果展示图：</p>
+<p><img src="19.png" alt></p>
+<h3 id="6、实现下载功能"><a href="#6、实现下载功能" class="headerlink" title="6、实现下载功能"></a>6、实现下载功能</h3><p>如果我们有一份源代码，想在网站上提供下载链接，只需要以下几步即可。</p>
+<p>这里我新建一份新的博客，命令test，使用hexo new post “test”指令后会得到一个test文件夹河test.md文件：</p>
+<p><img src="26.png" alt></p>
+<p>然后将希望下载的文件，比如说21.pdf文件，放入test文件夹下。</p>
+<p>在test.md中，编写：</p>
+<p><img src="27.png" alt></p>
+<p>然后，编译运行之后，便可以成功！</p>
+<p><img src="28.png" alt></p>
+<h2 id="三、多台设备同步更新网站"><a href="#三、多台设备同步更新网站" class="headerlink" title="三、多台设备同步更新网站"></a>三、多台设备同步更新网站</h2><p>但是，如果我想要发布博客，或者对网站功能进行优化升级，就只能通过实验室的电脑进行操作，因为网站的环境配置文件和代码都保存在电脑本地端。如果我有事情要外出出差个两周，在出差这段时间我有好的idea想要发布在博客上，应该怎么办呢？那么接下来我就教大家如何在多台电脑上发布和维护博客。</p>
+<h3 id="1、代码备份到GitHub上"><a href="#1、代码备份到GitHub上" class="headerlink" title="1、代码备份到GitHub上"></a>1、代码备份到GitHub上</h3><p>首先，需要在GitHub上新建一个repository ,名，命名为myblog_hexo，如果你不想让别人访问你的项目，可以设置为private：</p>
+<p><img src="20.png" alt></p>
+<p>我们接下来就将我们在本地的网站源码上传到myblog_hexo中，打开<code>D:\MyBlog</code>，在MyBlog目录下打开Git Bash工具，输入：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/fyhaha/myblog_hexo  //将GitHub中新建的myblog_hexo下载到本地中</code></pre>
+<p>然后你会发现在你的MyBlog文件夹中多了一个myblog_hexo的文件夹，进入myblog_hexo目录下，找到.git文件夹。有的同学可能进入myblog_hexo目录后 ，没有发现这个.git文件夹，这是因为.git文件默认是隐藏的，所以我们需要将隐藏的文件显示出来：</p>
+<p><img src="21.png" alt></p>
+<p>然后，将.git移到MyBlog文件夹目录下，在Git Bash工具中输入：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> add -A
+<span class="token function">git</span> commit -m <span class="token string">"xxxxx"</span>  // 引号内的xxxx可以随便写
+<span class="token function">git</span> push</code></pre>
+<p>执行完之后，本地的代码就会上传到GitHub新建的myblog_hexo中。接下来你就可以在另一台电脑上进行网站的运营和维护了。</p>
+<h3 id="2、在另一台设备上创建发布博客"><a href="#2、在另一台设备上创建发布博客" class="headerlink" title="2、在另一台设备上创建发布博客"></a>2、在另一台设备上创建发布博客</h3><p>这里我要在一台从来没有配置过博客环境的MacBook上进行操作示范，首先，要确保Mac上安装了Node.js hexo Git(一般Mac上都会自带Git环境)，如果没有的话，自行参照上文第一章进行安装。然后还要将Mac和GitHub连接，如同我们2.1中所介绍，将Mac的ssh key保存到GitHub中即可。</p>
+<p>Mac生成ssh密钥方式和windows相似，打开终端，输入<code>ssh-keygen -t rsa</code>，一路回车到底即可。然后使用 </p>
+<p><code>cat ~/.ssh/id_rsa.pub</code> 来查看密钥。将密钥信息拷贝到GitHub中保存即可（操作同2.1节）。</p>
+<p>连接成功后，新建MyBlog文件夹，打开终端，进入你所新建的文件夹中，然后使用Git指令将你在GitHub上的myblog_hexo项目下载到本地：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">cd</span> /Users/freddy/Documents/MyBlog  
+<span class="token function">git</span> clone https://github.com/fyhaha/myblog_hexo</code></pre>
+<p>然后进入myblog_hexo目录下，进行安装hexo必要组件，</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">cd</span> myblog_hexo
+<span class="token function">npm</span> <span class="token function">install</span></code></pre>
+<p>OK,到这里，你就可以在Mac上创建你的博客，</p>
+<pre class=" language-bash"><code class="language-bash">hexo new post <span class="token string">"lalala"</span></code></pre>
+<p>然后对它进行编辑，编辑完成后，通过hexo clean &amp;&amp; hexo g &amp;&amp; hexo d 将博客部署到GitHub服务器上，然后在浏览器中就可以看到你新发布的博客了。注意，当你完成之后发布之后，别忘了将你修改后的文件上传到GitHub上，</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> add -A
+<span class="token function">git</span> commit -m <span class="token string">"xxxx"</span>
+<span class="token function">git</span> push </code></pre>
+<p><strong><em>注意</em></strong></p>
+<p>如果你之前已经在某台电脑上创建发布过博客，那么再使用这台电脑进行发布博客时，就不需要再进行上述那么麻烦的同步工作了，这就得益于GitHub的强大功能了。以我实验室的电脑为例，倘若我经过上述步骤后，在Mac上成功发布了一篇博客，现在我又要用我实验室的电脑（也就是最初我用来搭建网站的电脑）来再次发布一篇博客，那么我需要在D:/MyBlog目录下使用Git Bash工具执行：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> pull  //将GitHub上的代码更新到本地</code></pre>
+<p>这样可以保证我在Mac上对网站内容所作的修改，同步更新到我本地。然后就可以按照上文所讲的步骤进行疯狂的各种操作，但别忘记了操作完之后，需要将本地修改后的网站内容上传至GitHub，确保网站的实时同步更新。</p>
+<h2 id="四、问题以及解决"><a href="#四、问题以及解决" class="headerlink" title="四、问题以及解决"></a>四、问题以及解决</h2><h3 id="1、使用gitalk插件实现评论"><a href="#1、使用gitalk插件实现评论" class="headerlink" title="1、使用gitalk插件实现评论"></a>1、使用gitalk插件实现评论</h3><p>在博客文章下面添加评论模块，hexo-theme-matery模板中已经提供了gitalk接口，很方便我们直接调用。我们要在GitHub中创建一个应用：<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">https://github.com/settings/applications/new</a> </p>
+<p><img src="22.png" alt></p>
+<p>创建之后，会出现clienIdhe clientSecret信息：</p>
+<p><img src="23.jpg" alt></p>
+<p>打开<code>D:\MyBlog\themes\hexo-theme-matery\ _config.yml</code>，</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">gitalk</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">owner</span><span class="token punctuation">:</span>  FyHaHa <span class="token comment" spellcheck="true">##GitHub 的用户名</span>
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> fyhaha.github.io <span class="token comment" spellcheck="true"># 前文建立的repository名称</span>
+  <span class="token key atrule">oauth</span><span class="token punctuation">:</span>
+    <span class="token key atrule">clientId</span><span class="token punctuation">:</span> 
+    <span class="token key atrule">clientSecret</span><span class="token punctuation">:</span> 
+  <span class="token key atrule">admin</span><span class="token punctuation">:</span> FyHaHa  <span class="token comment" spellcheck="true">##GitHub 的用户名</span></code></pre>
+<p>然后 <code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code></p>
+<p>但是，你会发现当你点击GitHub登陆时，总会跳转到博客主页，这是为什么呢？韩先森一开始也百思不得其解，最后查阅资料知道，我们在创建repository 时，勾选了Enforce HTTPS（下图）选项，所以导致每当我们点击GitHub登陆时，总是寻址都寻不到正确的网址，不得已才会回调到我们博客。</p>
+<p><img src="25.png" alt></p>
+<p>所以我们应该在GitHub创建应用时，应该将网址前缀修改为https，</p>
+<p><img src="24.png" alt></p>
+<p>这样，就可以正常登录GitHub进行评论了。</p>
+<h3 id="2、图片上传失败"><a href="#2、图片上传失败" class="headerlink" title="2、图片上传失败"></a>2、图片上传失败</h3><p>这点是自己在做测试时发现的，在写博客的时候，有时候如果图片尺寸过大，容易造成上传不成功，这时候就需要对图像进行压缩后上传。</p>
+<p>……</p>
+<p>( <strong>此部分将在另外一篇文章中持续更新！</strong>)</p>
+<hr>
+<p>以上就是我搭建的全部过程，如果同学你在过程中依然存在某些问题，可以在底下评论，或者E-mail我都可以，联系方式，可以见博客的“关于”。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.hanfeiyu.com/2019/08/27/start-my-blog/" title="完整教程:(低成本快速)手把手教你搭建基于hexo+GitHub的个人博客" target="_blank" rel="external">http://www.hanfeiyu.com/2019/08/27/start-my-blog/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://me.csdn.net/dreamerhan" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/favicon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://me.csdn.net/dreamerhan" target="_blank"><span class="text-dark">FyHaHa</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/08/31/some-problems-in-blog-solved/" title="Blog搭建过程中的问题解决"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

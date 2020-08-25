@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>FyHaHa</title>
+  
+  <subtitle>我的主页</subtitle>
+  <link href="http://www.hanfeiyu.com/atom.xml" rel="self"/>
+  
+  <link href="http://www.hanfeiyu.com/"/>
+  <updated>2020-08-24T13:55:50.726Z</updated>
+  <id>http://www.hanfeiyu.com/</id>
+  
+  <author>
+    <name>XXXXL超大码</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于BLE的多节点AoA室内定位</title>
+    <link href="http://www.hanfeiyu.com/2020/04/22/BLE-Localization/"/>
+    <id>http://www.hanfeiyu.com/2020/04/22/BLE-Localization/</id>
+    <published>2020-04-22T09:00:29.000Z</published>
+    <updated>2020-08-24T13:55:50.726Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;AOA定位原理&quot;&gt;&lt;a href=&quot;#AOA定位原理&quot; class=&quot;headerlink&quot; title=&quot;AOA定位原理&quot;&gt;&lt;/a&gt;AOA定位原理&lt;/h2&gt;&lt;p&gt;AOA（Arrival of Angle）定位方法是通过计算目标发射的信号到达AP(Access P</summary>
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://www.hanfeiyu.com/categories/学习笔记/"/>
+    
+    
+    <category term="CC26x2R" scheme="http://www.hanfeiyu.com/tags/CC26x2R/"/>
+    
+    <category term="RTLS" scheme="http://www.hanfeiyu.com/tags/RTLS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量</title>
+    <link href="http://www.hanfeiyu.com/2020/04/14/cc26x2r-aoa/"/>
+    <id>http://www.hanfeiyu.com/2020/04/14/cc26x2r-aoa/</id>
+    <published>2020-04-14T01:18:25.000Z</published>
+    <updated>2020-08-24T13:55:50.795Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在上一篇博客中(&lt;a href=&quot;https://blog.csdn.net/dreamerhan/article/details/105248944&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://blog.csdn.net/dreamer</summary>
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://www.hanfeiyu.com/categories/学习笔记/"/>
+    
+    
+    <category term="CC26x2R" scheme="http://www.hanfeiyu.com/tags/CC26x2R/"/>
+    
+    <category term="RTLS" scheme="http://www.hanfeiyu.com/tags/RTLS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于CC26x2R LaunchPad的RTLS系统搭建</title>
+    <link href="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/"/>
+    <id>http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/</id>
+    <published>2020-03-26T11:34:14.000Z</published>
+    <updated>2020-08-24T13:55:50.726Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;一、硬件需求-amp-软件环境&quot;&gt;&lt;a href=&quot;#一、硬件需求-amp-软件环境&quot; class=&quot;headerlink&quot; title=&quot;一、硬件需求 &amp;amp; 软件环境&quot;&gt;&lt;/a&gt;一、硬件需求 &amp;amp; 软件环境&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SimpleLi</summary>
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://www.hanfeiyu.com/categories/学习笔记/"/>
+    
+    
+    <category term="CC26x2R" scheme="http://www.hanfeiyu.com/tags/CC26x2R/"/>
+    
+    <category term="RTLS" scheme="http://www.hanfeiyu.com/tags/RTLS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot学习笔记1：使用IntelliJ IDEA创建基于Spring Boot的Maven项目</title>
+    <link href="http://www.hanfeiyu.com/2020/03/20/Spring-boot-basedon-maven/"/>
+    <id>http://www.hanfeiyu.com/2020/03/20/Spring-boot-basedon-maven/</id>
+    <published>2020-03-20T13:03:57.000Z</published>
+    <updated>2020-08-24T13:55:50.767Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1、开发环境&quot;&gt;&lt;a href=&quot;#1、开发环境&quot; class=&quot;headerlink&quot; title=&quot;1、开发环境&quot;&gt;&lt;/a&gt;1、开发环境&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;IntelliJ IDEA ver2019.3.2 （money购买正版/高校邮箱免费申请使用/</summary>
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://www.hanfeiyu.com/categories/学习笔记/"/>
+    
+    
+    <category term="Spring Boot" scheme="http://www.hanfeiyu.com/tags/Spring-Boot/"/>
+    
+    <category term="Maven" scheme="http://www.hanfeiyu.com/tags/Maven/"/>
+    
+    <category term="IntelliJ IDEA" scheme="http://www.hanfeiyu.com/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>艺术</title>
+    <link href="http://www.hanfeiyu.com/2019/12/14/note20191214/"/>
+    <id>http://www.hanfeiyu.com/2019/12/14/note20191214/</id>
+    <published>2019-12-14T06:11:57.000Z</published>
+    <updated>2020-08-24T13:55:50.795Z</updated>
+    
+    
+    <summary type="html">如需要可联系管理员密码</summary>
+    
+    
+    
+    <category term="随笔" scheme="http://www.hanfeiyu.com/categories/随笔/"/>
+    
+    
+    <category term="感悟" scheme="http://www.hanfeiyu.com/tags/感悟/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Honey Happy Happy</title>
+    <link href="http://www.hanfeiyu.com/2019/12/01/guarantee-for-myhappy/"/>
+    <id>http://www.hanfeiyu.com/2019/12/01/guarantee-for-myhappy/</id>
+    <published>2019-11-30T16:06:35.000Z</published>
+    <updated>2020-08-24T13:55:50.795Z</updated>
+    
+    
+    <summary type="html">特定人可见</summary>
+    
+    
+    
+    <category term="随笔" scheme="http://www.hanfeiyu.com/categories/随笔/"/>
+    
+    
+    <category term="随笔" scheme="http://www.hanfeiyu.com/tags/随笔/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSI误差(SFO+CFO+PDD+etc...)简介</title>
+    <link href="http://www.hanfeiyu.com/2019/11/02/error-of-CSI/"/>
+    <id>http://www.hanfeiyu.com/2019/11/02/error-of-CSI/</id>
+    <published>2019-11-02T03:13:03.000Z</published>
+    <updated>2020-08-24T13:55:50.795Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;近期由于文章和任务需要，需要对CSI测量的误差进行分析，借鉴了几篇目前顶刊文章，进行了一个简单的整理。这里只是从表层上进行了一个介绍，由于作者也是近期刚刚接触，也有很多不明白的地方，如有问题，请随时联系作者，共同学习和进步。&lt;/p&gt;
+&lt;h3 id=&quot;一、线性误差&quot;&gt;&lt;a h</summary>
+      
+    
+    
+    
+    <category term="无线信号" scheme="http://www.hanfeiyu.com/categories/无线信号/"/>
+    
+    
+    <category term="WiFi" scheme="http://www.hanfeiyu.com/tags/WiFi/"/>
+    
+    <category term="CSI误差分析" scheme="http://www.hanfeiyu.com/tags/CSI误差分析/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac和Windows系统中ssh密钥的生成和共享</title>
+    <link href="http://www.hanfeiyu.com/2019/11/02/sshkey-mac-windows/"/>
+    <id>http://www.hanfeiyu.com/2019/11/02/sshkey-mac-windows/</id>
+    <published>2019-11-02T02:43:53.000Z</published>
+    <updated>2020-08-24T13:55:50.808Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1、Windows环境下获得公钥和私钥&quot;&gt;&lt;a href=&quot;#1、Windows环境下获得公钥和私钥&quot; class=&quot;headerlink&quot; title=&quot;1、Windows环境下获得公钥和私钥&quot;&gt;&lt;/a&gt;&lt;strong&gt;1、Windows环境下获得公钥和私钥&lt;/</summary>
+      
+    
+    
+    
+    <category term="ssh连接" scheme="http://www.hanfeiyu.com/categories/ssh连接/"/>
+    
+    
+    <category term="ssh密钥" scheme="http://www.hanfeiyu.com/tags/ssh密钥/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Blog搭建过程中的问题解决</title>
+    <link href="http://www.hanfeiyu.com/2019/08/31/some-problems-in-blog-solved/"/>
+    <id>http://www.hanfeiyu.com/2019/08/31/some-problems-in-blog-solved/</id>
+    <published>2019-08-31T01:28:49.000Z</published>
+    <updated>2020-08-24T13:55:50.800Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;之前基于Hexo的matery模板搭建了一个个人博客(搭建教程详见另一篇博客：(&lt;a href=&quot;https://hanfeiyu.com/2019/08/27/start-my-blog/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://h</summary>
+      
+    
+    
+    
+    <category term="网站搭建" scheme="http://www.hanfeiyu.com/categories/网站搭建/"/>
+    
+    
+    <category term="博客搭建" scheme="http://www.hanfeiyu.com/tags/博客搭建/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>完整教程:(低成本快速)手把手教你搭建基于hexo+GitHub的个人博客</title>
+    <link href="http://www.hanfeiyu.com/2019/08/27/start-my-blog/"/>
+    <id>http://www.hanfeiyu.com/2019/08/27/start-my-blog/</id>
+    <published>2019-08-27T13:24:26.000Z</published>
+    <updated>2020-08-24T13:55:50.808Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;最近，韩先森即将迎来开学，于是就想利用开学之前的这段日子做些小玩意，比如搭建一个个人博客出来，心动不如行动，那就开始做吧。我之前对网站搭建也有一定的了解，但是仅限于了解，基本上和小白差不多。这不，前前后后折腾了3天的时间才将网站搭了出来，搭建过程中，也就是购买域名的时候花了</summary>
+      
+    
+    
+    
+    <category term="网站搭建" scheme="http://www.hanfeiyu.com/categories/网站搭建/"/>
+    
+    
+    <category term="博客搭建" scheme="http://www.hanfeiyu.com/tags/博客搭建/"/>
+    
+    <category term="hexo" scheme="http://www.hanfeiyu.com/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>基于CC26x2R LaunchPad的RTLS系统搭建 | Hexo</title>
+  <meta name="description" content="一、硬件需求 &amp;amp; 软件环境 SimpleLink CC26x2R LaunchPad  x 3, BOOSTXL-AoA x 1; SimpleLink CC13x2/26x2 SDK ver.3.40; Python 3.7+; Code Composer Studio （CCS）ver.9.2.0.0; Uniflash ver.5.3.1; TICloudAgent（安装CCS时就会">
+<meta name="keywords" content="CC26x2R,RTLS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于CC26x2R LaunchPad的RTLS系统搭建">
+<meta property="og:url" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/index.html">
+<meta property="og:site_name" content="FyHaHa">
+<meta property="og:description" content="一、硬件需求 &amp;amp; 软件环境 SimpleLink CC26x2R LaunchPad  x 3, BOOSTXL-AoA x 1; SimpleLink CC13x2/26x2 SDK ver.3.40; Python 3.7+; Code Composer Studio （CCS）ver.9.2.0.0; Uniflash ver.5.3.1; TICloudAgent（安装CCS时就会">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/1.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/2.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/3.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/5.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/6.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/9.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/10.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/11.png">
+<meta property="og:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/8.png">
+<meta property="og:updated_time" content="2020-08-24T13:55:50.726Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于CC26x2R LaunchPad的RTLS系统搭建">
+<meta name="twitter:description" content="一、硬件需求 &amp;amp; 软件环境 SimpleLink CC26x2R LaunchPad  x 3, BOOSTXL-AoA x 1; SimpleLink CC13x2/26x2 SDK ver.3.40; Python 3.7+; Code Composer Studio （CCS）ver.9.2.0.0; Uniflash ver.5.3.1; TICloudAgent（安装CCS时就会">
+<meta name="twitter:image" content="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="FyHaHa" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://me.csdn.net/dreamerhan" target="_blank">
+          <img class="img-circle img-rotate" src="/images/favicon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">FyHaHa</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hefei, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ssh连接/">ssh连接</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/无线信号/">无线信号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站搭建/">网站搭建</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CC26x2R/" style="font-size: 14px;">CC26x2R</a> <a href="/tags/CSI误差分析/" style="font-size: 13px;">CSI误差分析</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 13px;">IntelliJ IDEA</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/RTLS/" style="font-size: 14px;">RTLS</a> <a href="/tags/Spring-Boot/" style="font-size: 13px;">Spring Boot</a> <a href="/tags/WiFi/" style="font-size: 13px;">WiFi</a> <a href="/tags/hexo/" style="font-size: 13px;">hexo</a> <a href="/tags/ssh密钥/" style="font-size: 13px;">ssh密钥</a> <a href="/tags/博客搭建/" style="font-size: 13.5px;">博客搭建</a> <a href="/tags/感悟/" style="font-size: 13px;">感悟</a> <a href="/tags/随笔/" style="font-size: 13px;">随笔</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CC26x2R/">CC26x2R</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSI误差分析/">CSI误差分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ-IDEA/">IntelliJ IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTLS/">RTLS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WiFi/">WiFi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh密钥/">ssh密钥</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搭建/">博客搭建</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/22/BLE-Localization/" class="title">基于BLE的多节点AoA室内定位</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-22T09:00:29.000Z" itemprop="datePublished">2020-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/14/cc26x2r-aoa/" class="title">基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-14T01:18:25.000Z" itemprop="datePublished">2020-04-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/" class="title">基于CC26x2R LaunchPad的RTLS系统搭建</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-03-26T11:34:14.000Z" itemprop="datePublished">2020-03-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/学习笔记/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/03/20/Spring-boot-basedon-maven/" class="title">Spring Boot学习笔记1：使用IntelliJ IDEA创建基于Spring Boot的Maven项目</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-03-20T13:03:57.000Z" itemprop="datePublished">2020-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/随笔/">随笔</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/12/14/note20191214/" class="title">艺术</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-14T06:11:57.000Z" itemprop="datePublished">2019-12-14</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、硬件需求-amp-软件环境"><span class="toc-number">1.</span> <span class="toc-text">一、硬件需求 &amp; 软件环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件：SimpleLink-CC26x2R-LaunchPad-amp-amp-BOOSTXL-AoA"><span class="toc-number">1.1.</span> <span class="toc-text">硬件：SimpleLink CC26x2R LaunchPad &amp;&amp; BOOSTXL-AoA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软件安装"><span class="toc-number">1.2.</span> <span class="toc-text">软件安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、RTLS"><span class="toc-number">2.</span> <span class="toc-text">二、RTLS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、RTLS系统框架"><span class="toc-number">2.1.</span> <span class="toc-text">1、RTLS系统框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、硬件程序编译"><span class="toc-number">2.2.</span> <span class="toc-text">2、硬件程序编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、程序烧录"><span class="toc-number">2.3.</span> <span class="toc-text">3、程序烧录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、运行可视化-Demo"><span class="toc-number">2.4.</span> <span class="toc-text">4、运行可视化 Demo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、运行非可视化Demo"><span class="toc-number">2.5.</span> <span class="toc-text">5、运行非可视化Demo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、TI-Cloud"><span class="toc-number">3.</span> <span class="toc-text">三、TI Cloud</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-SimpleLink-CC26x2R-Launchpad-RTLS" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于CC26x2R LaunchPad的RTLS系统搭建
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/" class="article-date">
+	  <time datetime="2020-03-26T11:34:14.000Z" itemprop="datePublished">2020-03-26</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CC26x2R/">CC26x2R</a>, <a class="article-tag-link" href="/tags/RTLS/">RTLS</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="一、硬件需求-amp-软件环境"><a href="#一、硬件需求-amp-软件环境" class="headerlink" title="一、硬件需求 &amp; 软件环境"></a>一、硬件需求 &amp; 软件环境</h2><ul>
+<li>SimpleLink CC26x2R LaunchPad  x 3, BOOSTXL-AoA x 1;</li>
+<li>SimpleLink CC13x2/26x2 SDK ver.3.40;</li>
+<li>Python 3.7+;</li>
+<li>Code Composer Studio （CCS）ver.9.2.0.0;</li>
+<li>Uniflash ver.5.3.1;</li>
+<li>TICloudAgent（安装CCS时就会自动安装）;</li>
+</ul>
+<p>CC26x2R开发版是基于蓝牙低功耗5.1技术进行定位，用户可以从开发板中提取到AoA、ToF信息，AoA和ToF定位原理可以参考官网说明<a href="http://dev.ti.com/tirex/explore/node?node=AHYhhuDNTaRXzkOlahOlvA__pTTHBmu__LATEST" target="_blank" rel="noopener">http://dev.ti.com/tirex/explore/node?node=AHYhhuDNTaRXzkOlahOlvA__pTTHBmu__LATEST</a>，或者其他一些无线技术定位文章。本文基于MacOS进行搭建，Windows环境会有一定的差异。另外，不同版本的SDK在使用的过程中，也会有一些差异。</p>
+<h3 id="硬件：SimpleLink-CC26x2R-LaunchPad-amp-amp-BOOSTXL-AoA"><a href="#硬件：SimpleLink-CC26x2R-LaunchPad-amp-amp-BOOSTXL-AoA" class="headerlink" title="硬件：SimpleLink CC26x2R LaunchPad &amp;&amp; BOOSTXL-AoA"></a>硬件：SimpleLink CC26x2R LaunchPad &amp;&amp; BOOSTXL-AoA</h3><p><img src="1.png" alt></p>
+<p>CC26x2R开发板在RTLS（Real-time Locating System）系统中充当定位节点，本身就内置单根天线，但是单天线的节点不足以满足RTLS的定位需求，所以需要将开发版外接BOOSTXL-AoA，以达到扩展节点天线数目的目的。</p>
+<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><p>1、配置Python 3.7环境，教程：<a href="https://pythonguidecn.readthedocs.io/zh/latest/starting/install3/osx.html" target="_blank" rel="noopener">https://pythonguidecn.readthedocs.io/zh/latest/starting/install3/osx.html</a>, 如果下载缓慢，可以为homebrew配置国内镜像如：阿里云、中科大等。</p>
+<p>2、下载SimpleLink CC13x2/26x2 SDK，需要注册TI账号，注册完成后即可下载，下载之前，TI会询问你SDK的用途，选择民用Civil即可。下载地址：<a href="http://www.ti.com/tool/download/SIMPLELINK-CC13X2-26X2-SDK" target="_blank" rel="noopener">http://www.ti.com/tool/download/SIMPLELINK-CC13X2-26X2-SDK</a>.</p>
+<p>3、Code Composer Studio （CCS），下载地址：<a href="https://software-dl.ti.com/ccs/esd/documents/ccs_downloads.html" target="_blank" rel="noopener">https://software-dl.ti.com/ccs/esd/documents/ccs_downloads.html</a>, 如果是在MacOS上进行开发，建议下载9.20版本，原因后面解释。</p>
+<p>4、Uniflash，下载地址<a href="http://www.ti.com/tool/UNIFLASH" target="_blank" rel="noopener">http://www.ti.com/tool/UNIFLASH</a>.  </p>
+<h2 id="二、RTLS"><a href="#二、RTLS" class="headerlink" title="二、RTLS"></a>二、RTLS</h2><h3 id="1、RTLS系统框架"><a href="#1、RTLS系统框架" class="headerlink" title="1、RTLS系统框架"></a>1、RTLS系统框架</h3><p><img src="2.png" alt></p>
+<p>定位系统包含4部分：Node Manager，Master，Slave，Passive。Node Manager是运行在PC端的软件（第四小节第五小节介绍），CC26x2R开发板扮演Master，Slave，Passive角色（第二小节介绍）。</p>
+<p>关于Master，Slave，Passive详细介绍可以参照官网说明，以下只做简要的介绍：</p>
+<p>&#10084; <strong>Master</strong></p>
+<ul>
+<li><p>与Slave端建立连接，并且讲连接链路的参数（地址信息，时钟精度，CRC等）传递给PC端。</p>
+</li>
+<li><p>与外围设备通过BLE链路分享AoA参数。</p>
+</li>
+<li><p>进行I/Q采样。</p>
+</li>
+<li><p>向Slave端发送指令，使得Slave端发送AoA packets。</p>
+</li>
+</ul>
+<p>&#10003; <strong>Slave</strong></p>
+<ul>
+<li>在BLE协议中扮演外围设备。</li>
+<li>通过CTE发送AoA packets到Master端。</li>
+</ul>
+<p>&#9728; <strong>Passive</strong></p>
+<ul>
+<li>可以通过CTE接收数据包，进行I/Q采样。</li>
+<li>监听Master和Slave之间的连接链路。</li>
+</ul>
+<h3 id="2、硬件程序编译"><a href="#2、硬件程序编译" class="headerlink" title="2、硬件程序编译"></a>2、硬件程序编译</h3><p>打开CCS，分别导入已经下载好的SDK（simplelink_cc13x2_26x2_sdk_3_40_00_02/examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/）中的<code>rtls_master</code>, <code>rtls_passive</code>,<code>rtls_slave</code> 三个例程。</p>
+<p><img src="3.png" alt></p>
+<p>编译完成之后，在工程文件夹目录下的Debug目录下，会生成.out和.hex的文件，这两个文件选其一即可，使用UniFlash烧录到硬件中。</p>
+<h3 id="3、程序烧录"><a href="#3、程序烧录" class="headerlink" title="3、程序烧录"></a>3、程序烧录</h3><p>将Boards通过USB串口连接到PC端，UniFlash会自动检测到设备以及相应的端口号，然后start，找到刚刚生成的.out文件，Load Image完成烧录。（依次将<code>rtls_master</code>, <code>rtls_passive</code>,<code>rtls_slave</code> 三个例程编译产生的.out文件烧录到Boards中）</p>
+<p><img src="5.png" alt></p>
+<p><img src="6.png" alt></p>
+<h3 id="4、运行可视化-Demo"><a href="#4、运行可视化-Demo" class="headerlink" title="4、运行可视化 Demo"></a>4、运行可视化 Demo</h3><p>TI在最新的SDK中为开发者提供了可视化的UI界面，使得开发更加友好。TI也保留了以前的命令行操作，对于我这种小白来说，一开始入手，还是先选择可视化的UI界面。</p>
+<p>在终端中输入以下指令：</p>
+<p><code>cd /Applications/ti/simplelink_cc13x2_26x2_sdk_3_40_00_02/tools/ble5stack/rtls_agent/rtls_ui</code> </p>
+<p><code>chmod 777 rtls_ui_macos</code></p>
+<p><code>rtls_ui_macos</code></p>
+<p>运行后，在电脑的默认浏览器中就会打开UI界面：</p>
+<p><img src="9.png" alt></p>
+<p>系统并没有识别出开发板，并且显示开发板不可用”N/A”。这是因为我们在使用CCS编译程序时，CCS会自动检测并更新XDS110固件的版本，打开终端，输入如下指令：</p>
+<p><code>cd /Applications/ti/ccs920/ccs/ccs_base/common/uscif/xds110</code></p>
+<p><code>xdsdfu -e</code></p>
+<p><img src="10.png" alt></p>
+<p>使用xdsdfu工具查看固件版本是3.0.0.7，这个问题困扰了我很久，我在TI E2E论坛上找到了类似问题<a href="https://e2e.ti.com/support/wireless-connectivity/bluetooth/f/538/p/875870/3243366" target="_blank" rel="noopener">https://e2e.ti.com/support/wireless-connectivity/bluetooth/f/538/p/875870/3243366</a>，我推测这个问题是和操作系统以及固件版本有关。在Windows上，开发板的固件版本即使在3.0.0.7，也依然可以被系统识别；但是在MacOS上，最新的固件版本则不可以支持，所以需要讲固件版本恢复到之前的老版本，所以这也为什么是在开头的时候，我建议大家下载CCS9.2，而不是下载最新的CCS，在CCS9.2中，我们可以使用xdsdfu工具将固件恢复到3.0.0.5。</p>
+<p><code>xdsdfu -m</code></p>
+<p><code>xdsdfu -f firmware.bin -r</code></p>
+<p>然后再使用<code>xdsdfu -e</code> 来查看现在的固件版本，</p>
+<p><img src="11.png" alt></p>
+<p>之后，重新运行可视化命令，Get Start后，自动识别PC连接的开发板，并显示开发板的属性：</p>
+<p><img src="8.png" alt></p>
+<h3 id="5、运行非可视化Demo"><a href="#5、运行非可视化Demo" class="headerlink" title="5、运行非可视化Demo"></a>5、运行非可视化Demo</h3><p>a、创建python虚拟环境</p>
+<p><code>cd /Applications/ti/simplelink_cc13x2_26x2_sdk_3_40_00_02/tools/ble5stack/rtls_agent/</code></p>
+<p><code>python3 -m venv .venv</code></p>
+<p>在当前目录下，新建了一个.venv文件，此文件是隐藏文件夹，使用快捷键”shift+command+.”查看。</p>
+<p><code>source .venv/bin/activate</code></p>
+<p>然后，打开package.sh，将第三行的代<code>PYTHON3=python3.7</code>修改为<code>PYTHON3=python</code></p>
+<p>在终端继续运行以下命令：</p>
+<p><code>package.sh -c -b -u -i</code></p>
+<p>然后在当前目录下新建requirements.txt，</p>
+<p>打开txt，输入以下内容，</p>
+<p><code>construct==2.9.45
+ websockets==7.0
+ pyserial==3.4</code></p>
+<p>requirements.txt存储的是python的外部依赖包名称，然后使用pip进行安装，</p>
+<p><code>python -m pip install -r requirements.txt</code></p>
+<p>这里，如果下载失败，就重新下载几次，直到成功为止。</p>
+<p>打开examples目录下的rtls_example_with_rtls_util.py文件，找到定义设备端口号的地方，并修改</p>
+<pre class=" language-python"><code class="language-python">devices <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span><span class="token string">"com_port"</span><span class="token punctuation">:</span> <span class="token string">"/dev/cu.usbmodemL1100ABP1"</span><span class="token punctuation">,</span> <span class="token string">"baud_rate"</span><span class="token punctuation">:</span> <span class="token number">460800</span><span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"CC26x2 Master"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span><span class="token string">"com_port"</span><span class="token punctuation">:</span> <span class="token string">"/dev/cu.usbmodemL1100ADL1"</span><span class="token punctuation">,</span> <span class="token string">"baud_rate"</span><span class="token punctuation">:</span> <span class="token number">460800</span><span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"CC26x2 Passive"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>        <span class="token punctuation">]</span></code></pre>
+<p>然后，在终端中继续运行以下指令：</p>
+<p><code>python -u examples/rtls_example_with_rtls_util.py</code></p>
+<p>然后，可以在终端中就可以查看打印的日志信息了。</p>
+<h2 id="三、TI-Cloud"><a href="#三、TI-Cloud" class="headerlink" title="三、TI Cloud"></a>三、TI Cloud</h2><p>CCS+SDK+UniFlash一共大约3.5G，并且CCS编译程序时所占用的内存资源很大，如果有同学电脑存储资源有限，不想下载这么大的开发工具，可以选择TI Cloud云开发工具，集成了CCS，UniFlash等开发工具以及Resource Explorer等资源库，可以满足一些基本的硬件开发。详见<a href="https://dev.ti.com/" target="_blank" rel="noopener">https://dev.ti.com/</a>. </p>
+<hr>
+<p>关于开发板的其他功能开发，将在后面章节会继续详解。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/" title="基于CC26x2R LaunchPad的RTLS系统搭建" target="_blank" rel="external">http://www.hanfeiyu.com/2020/03/26/SimpleLink-CC26x2R-Launchpad-RTLS/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://me.csdn.net/dreamerhan" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/favicon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://me.csdn.net/dreamerhan" target="_blank"><span class="text-dark">FyHaHa</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/14/cc26x2r-aoa/" title="基于SimpleLink CC26x2R LaunchPad的AoA角度误差测量"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/03/20/Spring-boot-basedon-maven/" title="Spring Boot学习笔记1：使用IntelliJ IDEA创建基于Spring Boot的Maven项目"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
